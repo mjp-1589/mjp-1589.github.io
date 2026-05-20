@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario Poblete — Técnico en Sistemas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0f1923;
+            --navy-mid: #162030;
+            --navy-light: #1e2d3d;
+            --gold: #c8a96e;
+            --gold-light: #e2c98a;
+            --cream: #f5f0e8;
+            --cream-dark: #ede5d4;
+            --text: #2c3e50;
+            --text-light: #5a6a7a;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 1.2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 25, 35, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(200, 169, 110, 0.2);
+        }
+
+        .nav-logo {
+            font-family: 'Courier New', serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            background: var(--navy);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px; right: -200px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(200,169,110,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px; left: -100px;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(200,169,110,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            padding: 8rem 4rem 8rem 6rem;
+            animation: fadeUp 0.9s ease both;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: rgba(200,169,110,0.12);
+            border: 1px solid rgba(200,169,110,0.3);
+            color: var(--gold);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0.4rem 1rem;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Courier New', serif;
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .hero-desc {
+            color: rgba(255,255,255,0.6);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--navy);
+            padding: 0.85rem 2rem;
+            border: none;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 0.85rem 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: border-color 0.3s, color 0.3s;
+            display: inline-block;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .hero-visual {
+            padding: 8rem 6rem 8rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            animation: fadeUp 0.9s 0.2s ease both;
+        }
+
+        .stat-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(200,169,110,0.15);
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .stat-card:hover {
+            background: rgba(200,169,110,0.06);
+            border-color: rgba(200,169,110,0.35);
+        }
+
+        .stat-icon {
+            width: 44px; height: 44px;
+            background: rgba(200,169,110,0.1);
+            border: 1px solid rgba(200,169,110,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.45);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-value {
+            color: var(--white);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* ── SECTIONS ── */
+        section {
+            padding: 6rem 6rem;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gold);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-family: 'Courier New', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            color: var(--navy);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .section-title em {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        /* ── SOBRE MI ── */
+        #sobre-mi {
+            background: var(--cream);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.85;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-text p strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: var(--white);
+            border: 1px solid var(--cream-dark);
+            padding: 1.2rem 1.5rem;
+            transition: border-color 0.3s, transform 0.2s;
+        }
+
+        .skill-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .skill-item-icon {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .skill-item-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+
+        .skill-item-desc {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+
+        /* ── SERVICIOS ── */
+        #servicios {
+            background: var(--navy);
+        }
+
+        #servicios .section-title {
+            color: var(--white);
+        }
+
+        .services-intro {
+            color: rgba(255,255,255,0.55);
+            font-size: 1rem;
+            max-width: 560px;
+            line-height: 1.75;
+            margin-bottom: 3.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5px;
+            background: rgba(200,169,110,0.1);
+        }
+
+        .service-card {
+            background: var(--navy-mid);
+            padding: 2.5rem;
+            transition: background 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 3px; height: 0;
+            background: var(--gold);
+            transition: height 0.4s ease;
+        }
+
+        .service-card:hover { background: var(--navy-light); }
+        .service-card:hover::before { height: 100%; }
+
+        .service-number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 3rem;
+            color: rgba(200,169,110,0.12);
+            line-height: 1;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+
+        .service-desc {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-bottom: 1.2rem;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tag {
+            background: rgba(200,169,110,0.1);
+            border: 1px solid rgba(200,169,110,0.2);
+            color: var(--gold);
+            font-size: 0.72rem;
+            padding: 0.25rem 0.6rem;
+            letter-spacing: 0.05em;
+        }
+
+        /* ── PROYECTOS ── */
+        #proyectos {
+            background: var(--cream-dark);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.08);
+            padding: 2.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .project-card.featured {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .project-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.6rem;
+            color: var(--navy);
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+        }
+
+        .project-desc {
+            color: var(--text-light);
+            font-size: 0.92rem;
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            background: var(--cream);
+            border: 1px solid var(--cream-dark);
+            color: var(--text);
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.3rem 0.75rem;
+        }
+
+        .project-visual {
+            background: var(--navy);
+            padding: 2rem;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .mock-bar {
+            height: 8px;
+            background: rgba(200,169,110,0.2);
+            border-radius: 2px;
+        }
+        .mock-bar.gold { background: rgba(200,169,110,0.6); width: 60%; }
+        .mock-bar.short { width: 40%; }
+        .mock-bar.medium { width: 75%; }
+
+        .mock-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mock-box {
+            flex: 1;
+            height: 50px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(200,169,110,0.15);
+        }
+
+        /* ── CONTACTO ── */
+        #contacto {
+            background: var(--navy);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+        }
+
+        #contacto .section-title { color: var(--white); }
+
+        .contact-intro {
+            color: rgba(255,255,255,0.55);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.1rem 1.4rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(200,169,110,0.12);
+            text-decoration: none;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(200,169,110,0.07);
+            border-color: rgba(200,169,110,0.3);
+        }
+
+        .contact-item-icon {
+            width: 38px; height: 38px;
+            background: rgba(200,169,110,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .contact-item-label {
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item-value {
+            font-size: 0.9rem;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* ── FORMULARIO ── */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(200,169,110,0.2);
+            color: var(--white);
+            padding: 0.9rem 1.1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.3s;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.25);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #080f15;
+            padding: 2rem 6rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(200,169,110,0.1);
+        }
+
+        .footer-name {
+            font-family: 'DM Serif Display', serif;
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        .footer-copy {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+        }
+
+        .footer-location {
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+        }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { gap: 1.5rem; }
+
+            .hero { grid-template-columns: 1fr; }
+            .hero-content { padding: 7rem 2rem 3rem; }
+            .hero-visual { padding: 2rem; }
+
+            section { padding: 4rem 2rem; }
+
+            #sobre-mi { grid-template-columns: 1fr; gap: 3rem; }
+            .services-grid { grid-template-columns: 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .project-card.featured { grid-column: 1; display: block; }
+            #contacto { grid-template-columns: 1fr; gap: 3rem; }
+            footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">MJP</div>
+    <ul class="nav-links">
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-tag">Técnico en Sistemas IT</span>
+        <h1>Mario<br>Joaquin<br><em>Poblete</em></h1>
+        <p class="hero-desc">
+            Especialista en reparación de PC, instalación de sistemas operativos 
+            y soporte técnico. Con base en Cipolletti y Neuquén, brindo soluciones 
+            confiables para particulares y empresas.
+        </p>
+        <div class="hero-btns">
+            <a href="#contacto" class="btn-primary">Contactarme</a>
+            <a href="#servicios" class="btn-outline">Ver servicios</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="stat-card">
+            <div class="stat-icon">🖥️</div>
+            <div>
+                <div class="stat-label">Especialidad principal</div>
+                <div class="stat-value">Reparación y mantenimiento de PC</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🐧</div>
+            <div>
+                <div class="stat-label">Sistemas operativos</div>
+                <div class="stat-value">Linux & Windows</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">📍</div>
+            <div>
+                <div class="stat-label">Zona de trabajo</div>
+                <div class="stat-value">Cipolletti y Neuquén</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🎓</div>
+            <div>
+                <div class="stat-label">Formación</div>
+                <div class="stat-value">Analista de Sistemas — ISSD</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOBRE MI -->
+<section id="sobre-mi">
+    <div class="about-text reveal">
+        <span class="section-label">Sobre mí</span>
+        <h2 class="section-title">Tecnología con <em>criterio</em></h2>
+        <p>
+            Soy <strong>Mario Joaquin Poblete</strong>, técnico en sistemas con experiencia 
+            práctica en reparación de hardware, administración Linux y soporte IT. 
+            Actualmente curso la carrera de Analista de Sistemas en el 
+            Instituto Superior Santo Domingo.
+        </p>
+        <p>
+            Me apasiona resolver problemas reales con tecnología — desde reparar 
+            una PC que no enciende hasta desarrollar herramientas internas 
+            para optimizar el trabajo de un equipo.
+        </p>
+        <p>
+            Trabajo con <strong>criterio y honestidad</strong>: diagnostico antes de 
+            recomendar, explico lo que hago y no genero gastos innecesarios.
+        </p>
+    </div>
+    <div class="skills-grid reveal">
+        <div class="skill-item">
+            <div class="skill-item-icon">🔧</div>
+            <div class="skill-item-name">Hardware PC</div>
+            <div class="skill-item-desc">Diagnóstico y reparación</div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-item-icon">🐧</div>
+            <div class="skill-item-name">Linux</div>
+            <div class="skill-item-desc">Administración y soporte</div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-item-icon">🪟</div>
+            <div class="skill-item-name">Windows</div>
+            <div class="skill-item-desc">Instalación y configuración</div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-item-icon">💻</div>
+            <div class="skill-item-name">Python</div>
+            <div class="skill-item-desc">Desarrollo en formación</div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-item-icon">🌐</div>
+            <div class="skill-item-name">HTML / JS</div>
+            <div class="skill-item-desc">Desarrollo web</div>
+        </div>
+        <div class="skill-item">
+            <div class="skill-item-icon">🗄️</div>
+            <div class="skill-item-name">Flask + SQLite</div>
+            <div class="skill-item-desc">Backend y bases de datos</div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+    <span class="section-label">Servicios</span>
+    <h2 class="section-title" style="color:var(--white)">Lo que puedo <em>hacer por vos</em></h2>
+    <p class="services-intro">
+        Servicios técnicos para particulares y pequeñas empresas en Cipolletti y Neuquén. 
+        Diagnóstico sin cargo previo a la reparación.
+    </p>
+    <div class="services-grid">
+        <div class="service-card reveal">
+            <div class="service-number">01</div>
+            <div class="service-icon">🖥️</div>
+            <h3 class="service-title">Reparación de PC y Notebook</h3>
+            <p class="service-desc">
+                Diagnóstico, reparación y mantenimiento de computadoras de escritorio 
+                y notebooks. Limpieza de componentes, cambio de pasta térmica, 
+                reemplazo de piezas y recuperación de equipos.
+            </p>
+            <div class="service-tags">
+                <span class="tag">Diagnóstico</span>
+                <span class="tag">Hardware</span>
+                <span class="tag">Mantenimiento</span>
+                <span class="tag">Limpieza</span>
+            </div>
+        </div>
+        <div class="service-card reveal">
+            <div class="service-number">02</div>
+            <div class="service-icon">⚙️</div>
+            <h3 class="service-title">Instalación de Sistemas Operativos</h3>
+            <p class="service-desc">
+                Instalación limpia y configuración de Windows y distribuciones Linux. 
+                Migración de datos, instalación de drivers y software esencial. 
+                Dual boot si necesitás ambos sistemas.
+            </p>
+            <div class="service-tags">
+                <span class="tag">Windows</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Dual Boot</span>
+                <span class="tag">Drivers</span>
+            </div>
+        </div>
+        <div class="service-card reveal">
+            <div class="service-number">03</div>
+            <div class="service-icon">🛠️</div>
+            <h3 class="service-title">Soporte Técnico IT</h3>
+            <p class="service-desc">
+                Soporte técnico general para empresas y particulares. 
+                Resolución de problemas de software, optimización del rendimiento, 
+                configuración de periféricos y asistencia remota.
+            </p>
+            <div class="service-tags">
+                <span class="tag">Soporte</span>
+                <span class="tag">Optimización</span>
+                <span class="tag">Software</span>
+                <span class="tag">Remoto</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos">
+    <span class="section-label">Proyectos</span>
+    <h2 class="section-title">Trabajo <em>real</em></h2>
+    <div class="projects-grid">
+        <div class="project-card featured reveal">
+            <div>
+                <span class="project-badge">Proyecto destacado</span>
+                <h3 class="project-title">Sistema de Inventario IT</h3>
+                <p class="project-desc">
+                    App web completa para la gestión de stock de materiales informáticos 
+                    en la Dirección de Sistemas. Permite registrar ingresos, realizar 
+                    entregas individuales y múltiples, generar actas PDF automáticas, 
+                    historial de transacciones y reportes CSV. 
+                    Migrada de almacenamiento local a servidor Flask con base de datos 
+                    SQLite, accesible desde cualquier dispositivo vía Tailscale.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">SQLite</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Tailwind CSS</span>
+                    <span class="tech-tag">jsPDF</span>
+                    <span class="tech-tag">Gemini AI</span>
+                </div>
+            </div>
+            <div class="project-visual">
+                <img src="inventario-preview.png" alt="Vista previa del Sistema de inventario IT" style="width: 100%; height: 100%; object-fit: cover; display: block;">  
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+    <div class="reveal">
+        <span class="section-label">Contacto</span>
+        <h2 class="section-title">Hablemos de <em>tu proyecto</em></h2>
+        <p class="contact-intro">
+            ¿Tu PC no enciende, necesitás instalar Linux o tenés algún problema técnico? 
+            Escribime y te respondo a la brevedad.
+        </p>
+        <div class="contact-items">
+            <a href="mailto:mariopoblete1589@gmail.com" class="contact-item">
+                <div class="contact-item-icon">✉️</div>
+                <div>
+                    <div class="contact-item-label">Email</div>
+                    <div class="contact-item-value">mariopoblete1589@gmail.com</div>
+                </div>
+            </a>
+            <a href="https://wa.me/542996266342" target="_blank" class="contact-item">
+                <div class="contact-item-icon">💬</div>
+                <div>
+                    <div class="contact-item-label">WhatsApp</div>
+                    <div class="contact-item-value">+54 299 626-6342</div>
+                </div>
+            </a>
+            <a href="https://www.linkedin.com/in/mario-joaquin-poblete" target="_blank" class="contact-item">
+                <div class="contact-item-icon">🔗</div>
+                <div>
+                    <div class="contact-item-label">LinkedIn</div>
+                    <div class="contact-item-value">mario-joaquin-poblete</div>
+                </div>
+            </a>
+            <div class="contact-item" style="cursor:default">
+                <div class="contact-item-icon">📍</div>
+                <div>
+                    <div class="contact-item-label">Zona de trabajo</div>
+                    <div class="contact-item-value">Cipolletti y Neuquén</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="reveal">
+        <form class="contact-form" action="https://formspree.io/f/xdajaezq" method="POST">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="tu@email.com" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Asunto</label>
+                <input type="text" name="asunto" placeholder="¿En qué puedo ayudarte?">
+            </div>
+            <div class="form-group">
+                <label>Mensaje</label>
+                <textarea name="mensaje" rows="5" placeholder="Describí el problema o consulta..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%; text-align:center;">
+                Enviar mensaje
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-name">Mario Joaquin Poblete</div>
+    <div class="footer-copy">© 2026 — Todos los derechos reservados</div>
+    <div class="footer-location">📍 Cipolletti, Río Negro</div>
+</footer>
+
+<script>
+    // Reveal on scroll
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 100);
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
